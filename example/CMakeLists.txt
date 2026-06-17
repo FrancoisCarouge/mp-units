@@ -34,6 +34,15 @@ target_sources(
 )
 target_link_libraries(example_utils-headers INTERFACE mp-units::mp-units)
 
+include(FetchContent)
+
+FetchContent_Declare(
+    fcarouge-typed-linear-algebra
+    GIT_REPOSITORY https://github.com/FrancoisCarouge/TypedLinearAlgebra.git
+    GIT_TAG master
+)
+FetchContent_MakeAvailable(fcarouge-typed-linear-algebra)
+
 if(MP_UNITS_BUILD_CXX_MODULES)
     add_library(example_utils INTERFACE)
     target_compile_features(example_utils INTERFACE cxx_std_20)
@@ -66,6 +75,7 @@ endfunction()
 add_example(avg_speed)
 add_example(capacitor_time_curve)
 add_example(currency)
+add_example(eigen fcarouge-typed-linear-algebra::tlinalg)
 add_example(foot_pound_second)
 add_example(glide_computer glide_computer_lib)
 add_example(hello_units)
